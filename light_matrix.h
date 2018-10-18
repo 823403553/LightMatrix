@@ -42,5 +42,5 @@ Mat* MatAdj(Mat* src, Mat* dst);
 Mat* MatInv(Mat* src, Mat* dst);
 
 void MatCopy(Mat* src, Mat* dst);
-
+Mat* MatDiag(Mat* src1, Mat* src2, Mat* dst);
 #endif
