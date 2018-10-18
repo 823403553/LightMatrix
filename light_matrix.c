@@ -400,3 +400,34 @@ void MatCopy(Mat* src, Mat* dst)
 			dst->element[row][col] = src->element[row][col];
 	}
 }
+Mat* MatDiag(Mat* src1, Mat* src2, Mat* dst )
+{	
+	int row, col;
+	#ifdef MAT_LEGAL_CHECKING
+	if( dst->row != src1->row+src2->row  || dst->col != src1->col+src2->col){
+		printf("err check, unmatch matrix for MatTranspose\n");
+		MatDump(src1);
+		MatDump(src2);
+		MatDump(dst);
+		return;
+	}
+	#endif
+		
+	for(row = 0 ; row < dst->row; row++){
+		for(col = 0 ; col < dst->col ; col++){
+			if 	(col < src1->col){
+				if (row < src1->row)
+					dst->element[row][col] = src1->element[row][col];
+				else 
+					dst->element[row][col] = 0.0f;
+			}
+			else{	
+				if (row < src1->row)
+					dst->element[row][col] = 0;
+				else
+					dst->element[row][col] = src2->element[row][col];
+			}
+		}
+	}
+
+}
