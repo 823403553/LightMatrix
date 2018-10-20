@@ -42,5 +42,7 @@ Mat* MatAdj(Mat* src, Mat* dst);
 Mat* MatInv(Mat* src, Mat* dst);
 
 void MatCopy(Mat* src, Mat* dst);
-
+void MatDiag(Mat* src1, Mat* src2, Mat* dst);
+void MatVertCnct(Mat* src1, Mat* src2, Mat* dst);
+void MatHorzCnct(Mat* src1, Mat* src2, Mat* dst);
 #endif
