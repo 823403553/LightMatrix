@@ -430,3 +430,54 @@ void MatDiag(Mat* src1, Mat* src2, Mat* dst )
 		}
 	}
 }
+
+
+
+void MatVertCnct(Mat* src1, Mat* src2, Mat* dst )
+{	
+	int row, col;
+	#ifdef MAT_LEGAL_CHECKING
+	if( dst->row != src1->row+src2->row  || dst->col != src1->col || dst->col !=src2->col){
+		printf("err check, unmatch matrix for MatVertCnct\n");
+		MatDump(src1);
+		MatDump(src2);
+		MatDump(dst);
+		return 0;
+	}
+	#endif
+		
+	for(row = 0 ; row < dst->row; row++){
+		for(col = 0 ; col < dst->col ; col++){
+			
+			if (row < src1->row)
+				dst->element[row][col] = src1->element[row][col];
+			else
+				dst->element[row][col] = src2->element[row-src1->row][col];
+		}
+	}
+}
+
+
+
+void MatHorzCnct(Mat* src1, Mat* src2, Mat* dst )
+{	
+	int row, col;
+	#ifdef MAT_LEGAL_CHECKING
+	if( dst->col != src1->col+src2->col  || dst->row != src1->row || dst->row !=src2->row){
+		printf("err check, unmatch matrix for MatHorzCnct\n");
+		MatDump(src1);
+		MatDump(src2);
+		MatDump(dst);
+		return 0;
+	}
+	#endif
+		
+	for(row = 0 ; row < dst->row; row++){
+		for(col = 0 ; col < dst->col ; col++){
+			if (col < src1->col)
+				dst->element[row][col] = src1->element[row][col];
+			else
+				dst->element[row][col] = src2->element[row][col-src1->col];
+		}
+	}
+}
